@@ -5,7 +5,7 @@ WORKDIR /go/src/github.com/qclaogui/golang-api-server
 # add source code
 COPY . .
 # build the source
-RUN CGO_ENABLED=0 GOOS=linux go build -o app main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o app cmd/main.go
 
 # use a minimal alpine image
 FROM alpine:3.8

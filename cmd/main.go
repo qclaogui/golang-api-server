@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"github.com/qclaogui/golang-api-server/internal/log"
 	"net/http"
 	"os"
 )
@@ -10,8 +10,9 @@ import (
 var port = "5012"
 
 func hello(w http.ResponseWriter, r *http.Request) {
+	log.Info("request from: "+r.RemoteAddr)
 	var name, _ = os.Hostname()
-	fmt.Fprintf(w, "Happy Coding!\n This request was processed by host: %s", name)
+	fmt.Fprintf(w, "Happy Coding! v1\nThis request was processed by host: %s", name)
 }
 
 func main() {
@@ -21,6 +22,6 @@ func main() {
 	if len(portEnv) > 0 {
 		port = portEnv
 	}
-	log.Printf("Listening on port %s...", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Info("Listening on port:"+ port)
+	log.Fatal(http.ListenAndServe(":"+port, nil).Error())
 }
