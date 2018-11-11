@@ -14,7 +14,7 @@ RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 # set working directory
 WORKDIR /root
 # set app port
-ENV APP_PORT 8886
+ENV APP_PORT 5012
 # copy the binary from builder
 COPY --from=builder /go/src/github.com/qclaogui/golang-api-server .
 
