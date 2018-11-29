@@ -1,3 +1,5 @@
+// +build !kafka
+
 package log
 
 import (

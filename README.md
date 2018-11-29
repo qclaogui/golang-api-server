@@ -1,2 +1,6 @@
 # golang-api-server
-think about it
+
+
+want log with kafka you should build like this:
+ 
+ `go build -tags=kafka .`
