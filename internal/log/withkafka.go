@@ -21,7 +21,7 @@ var (
 	// timeFormat is custom Time format
 	timeFormat = "2006-01-02T15:04:05.999999999Z07:00"
 	// kafka address
-	brokers = "172.16.10.156,172.16.10.157"
+	brokers = "172.16.10.156:9092,172.16.10.157"
 	// onceInit guarantee initialize logger only once
 	onceInit sync.Once
 )
