@@ -70,9 +70,12 @@ func newLogger(lvl int, timeFormat string) error {
 		// implement io.Writer, we can use zapcore.AddSync to add a no-op Sync
 		// method. If they're not safe for concurrent use, we can add a protecting
 		// mutex with zapcore.Lock.)
-		kaf := internal.NewLog2Kafka(&internal.KafkaConfig{Hosts: brokers, Topic: "log-demo"})
-		topicInfo := zapcore.AddSync(kaf)
-		topicError := zapcore.AddSync(kaf)
+		topicInfo := internal.NewLog2Kafka(&internal.KafkaConfig{Hosts: brokers, Topic: "log-info"})
+		topicError := internal.NewLog2Kafka(&internal.KafkaConfig{Hosts: brokers, Topic: "log-error"})
+
+		kafkaInfo := zapcore.AddSync(topicInfo)
+		kafkaError := zapcore.AddSync(topicError)
+
 		// High-priority output should also go to standard error, and low-priority
 		// output should also go to standard out.
 		consoleInfo := zapcore.Lock(os.Stdout)
@@ -92,8 +95,8 @@ func newLogger(lvl int, timeFormat string) error {
 		// Join the outputs, encoders, and level-handling functions into
 		// zapcore.Cores, then tee the four cores together.
 		core := zapcore.NewTee(
-			zapcore.NewCore(kafkaEncoder, topicInfo, lowPriority),
-			zapcore.NewCore(kafkaEncoder, topicError, highPriority),
+			zapcore.NewCore(kafkaEncoder, kafkaInfo, lowPriority),
+			zapcore.NewCore(kafkaEncoder, kafkaError, highPriority),
 			//
 			zapcore.NewCore(consoleEncoder, consoleInfo, lowPriority),
 			zapcore.NewCore(consoleEncoder, consoleError, highPriority),
