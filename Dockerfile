@@ -1,23 +1,31 @@
-FROM golang:1.11.2 as builder
-MAINTAINER qclaogui <qclaogui@gmail.com>
-
-WORKDIR /go/src/github.com/qclaogui/golang-api-server
+FROM golang:1.12.4 as builder
+LABEL maintainer="qclaogui <qclaogui@gmail.com>"
+ENV PROJECT github.com/qclaogui/golang-api-server
+WORKDIR /root
 # add source code
 COPY . .
+# commit hash
+ARG COMMIT
+# app build time
+ARG RELEASE
+# app build time
+ARG BUILD_TIME
 # build the source
-RUN CGO_ENABLED=0 GOOS=linux go build -o app cmd/main.go
+RUN GOOS=linux GOARCH=amd64 go build -mod=vendor -ldflags "-s -w \
+-X $PROJECT/version.Commit=$COMMIT \
+-X $PROJECT/version.Release=$RELEASE \
+-X $PROJECT/version.BuildTime=$BUILD_TIME" \
+-o main cmd/main.go
 
-# use a minimal alpine image
-FROM alpine:3.8
-# add ca-certificates in case you need them
-RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
-# set working directory
-WORKDIR /root
-# set app port
-ENV APP_PORT 5012
+# use google's best practices image
+FROM gcr.io/distroless/base
 # copy the binary from builder
-COPY --from=builder /go/src/github.com/qclaogui/golang-api-server .
+COPY --from=builder /root/main .
+# APP_PORT
+ARG APP_PORT
+# default 5012
+ENV APP_PORT ${APP_PORT:-5012}
 
 EXPOSE $APP_PORT
 # run the binary
-CMD ["./app"]
+CMD ["./main"]
