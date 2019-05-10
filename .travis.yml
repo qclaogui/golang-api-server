@@ -6,11 +6,16 @@ language: go
 # Force-enable Go modules.
 env:
   - GO111MODULE=on
-  - GOFLAGS='-mod vendor'
 
-go:
-  - 1.12.x
-
+# Run all the tests with the race detector enabled
+matrix:
+  include:
+    - go: "1.10"
+      script:  go test -v -race ./...
+    - go: 1.11.x
+      script: go test -v -mod=vendor -race ./...
+    - go: 1.12.x
+      script: go test -v -mod=vendor -race ./...
 # Only clone the most recent commit.
 git:
   depth: 1
@@ -22,7 +27,3 @@ install: true
 # Don't email me the results of the test runs.
 notifications:
   email: false
-
-# go test
-script:
-  - go test -v -race ./...  # Run all the tests with the race detector enabled
