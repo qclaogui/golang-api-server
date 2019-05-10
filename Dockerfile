@@ -1,9 +1,11 @@
-FROM golang:1.12.4 as builder
+FROM golang:1.12.5 as builder
 LABEL maintainer="qclaogui <qclaogui@gmail.com>"
 ENV PROJECT github.com/qclaogui/golang-api-server
 WORKDIR /root
 # add source code
 COPY . .
+# build args, example:
+# docker build --build-arg --build-arg COMMIT=$(COMMIT) --build-arg RELEASE=$(RELEASE) --build-arg BUILD_TIME=$(BUILD_TIME) -t $(IMAGE):$(RELEASE)
 # commit hash
 ARG COMMIT
 # app build time
