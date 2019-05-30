@@ -1,0 +1,18 @@
+stages:
+  - name: Build
+    steps:
+      - runScriptConfig:
+          image: golang:1.12.5
+          shellScript: |-
+            make build
+            make test
+  - name: Publish
+    steps:
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: example-helloserver:${CICD_EXECUTION_SEQUENCE}
+  - name: Deploy
+    steps:
+      - applyYamlConfig:
+          path: ./deployment.yaml

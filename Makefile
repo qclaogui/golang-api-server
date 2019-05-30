@@ -3,14 +3,14 @@ COMMIT?=$(shell git rev-parse --short HEAD)
 RELEASE?=0.0.0
 BUILD_TIME?=$(shell date -u '+%Y-%m-%d_%H:%M:%S')
 
-IMAGE?=api-server
-APP_PORT?=5013
+IMAGE?=golang-api-server
+APP_PORT?=5012
 APP?="main"
 clean:
 	rm -f ${APP}
 
 build: clean
-	CGO_ENABLED=0 go build -mod=vendor -ldflags "-s -w \
+		go build -ldflags "-s -w \
 		-X ${PROJECT}/version.Commit=${COMMIT} \
 		-X ${PROJECT}/version.Release=${RELEASE} \
 		-X ${PROJECT}/version.BuildTime=${BUILD_TIME}" \
