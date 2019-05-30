@@ -13,14 +13,16 @@ ARG RELEASE
 # app build time
 ARG BUILD_TIME
 # build the source
-RUN GOOS=linux GOARCH=amd64 go build -mod=vendor -ldflags "-s -w \
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -ldflags "-s -w \
 -X $PROJECT/version.Commit=$COMMIT \
 -X $PROJECT/version.Release=$RELEASE \
 -X $PROJECT/version.BuildTime=$BUILD_TIME" \
 -o main cmd/main.go
 
 # use google's best practices image
-FROM gcr.io/distroless/base
+#FROM gcr.io/distroless/base
+FROM alpine:3.8
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 # copy the binary from builder
 COPY --from=builder /root/main .
 # APP_PORT
