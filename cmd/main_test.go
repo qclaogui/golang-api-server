@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 )
@@ -25,4 +26,14 @@ func TestHelloHandler(t *testing.T) {
 			"✘got: %v\n\x1b[92m"+
 			"want Contains: %v\x1b[39m", got, want)
 	}
+}
+
+func TestMain(m *testing.M) {
+	// Use a helper function to ensure we run shutdown()
+	// before calling os.Exit()
+	os.Exit(mainHelper(m))
+}
+
+func mainHelper(m *testing.M) int {
+	return m.Run()
 }
