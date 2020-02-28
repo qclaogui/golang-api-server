@@ -3,6 +3,10 @@
 </div>
 <p align="center">
 
+<a href="https://github.com/qclaogui/golang-api-server/workflows/Build%20and%20Test/badge.svg">
+  <img src="https://github.com/qclaogui/golang-api-server/workflows/Build%20and%20Test/badge.svg">
+</a>
+
 <a href="https://travis-ci.org/qclaogui/golang-api-server">
   <img src="https://travis-ci.org/qclaogui/golang-api-server.svg?branch=master">
 </a>
@@ -27,6 +31,5 @@
 
 ![k8s.png](https://i.loli.net/2018/11/29/5bff6efca7e44.png)
 
-want log with kafka you should build like this:
- 
- `go build -tags=kafka .`
+
+![Build and Test](https://github.com/qclaogui/golang-api-server/workflows/Build%20and%20Test/badge.svg)
