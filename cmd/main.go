@@ -16,7 +16,6 @@ var port = "5012"
 var sourceLink = "https://github.com/qclaogui/golang-api-server"
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	log.Println("request from: " + r.RemoteAddr)
 	var ver = fmt.Sprintf("Build on %s [commit: %s, build time: %s, release: %s]", runtime.Version(),
 		version.Commit, version.BuildTime, version.Release)
 

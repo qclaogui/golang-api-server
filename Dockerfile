@@ -1,4 +1,4 @@
-FROM golang:1.12.5 as builder
+FROM golang:1.14.0 as builder
 LABEL maintainer="qclaogui <qclaogui@gmail.com>"
 ENV PROJECT github.com/qclaogui/golang-api-server
 WORKDIR /root
@@ -21,7 +21,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -ldflags "-s -w \
 
 # use google's best practices image
 #FROM gcr.io/distroless/base
-FROM alpine:3.8
+FROM alpine:3.11.3
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 # copy the binary from builder
 COPY --from=builder /root/main .
