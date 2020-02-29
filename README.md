@@ -30,6 +30,3 @@
 </p>
 
 ![k8s.png](https://i.loli.net/2018/11/29/5bff6efca7e44.png)
-
-
-![Build and Test](https://github.com/qclaogui/golang-api-server/workflows/Build%20and%20Test/badge.svg)
