@@ -3,8 +3,8 @@
 </div>
 <p align="center">
 
-<a href="https://github.com/qclaogui/golang-api-server/workflows/Build%20and%20Test/badge.svg">
-  <img src="https://github.com/qclaogui/golang-api-server/workflows/Build%20and%20Test/badge.svg">
+<a href="https://github.com/qclaogui/golang-api-server/workflows/Build%20&%20Test/badge.svg">
+  <img src="https://github.com/qclaogui/golang-api-server/workflows/Build%20&%20Test/badge.svg">
 </a>
 
 <a href="https://travis-ci.org/qclaogui/golang-api-server">
