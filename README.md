@@ -7,10 +7,6 @@
   <img src="https://github.com/qclaogui/golang-api-server/workflows/Build%20&%20Test/badge.svg">
 </a>
 
-<a href="https://travis-ci.org/qclaogui/golang-api-server">
-  <img src="https://travis-ci.org/qclaogui/golang-api-server.svg?branch=master">
-</a>
-
 <a href="https://codecov.io/gh/qclaogui/golang-api-server">
   <img src="https://codecov.io/gh/qclaogui/golang-api-server/branch/master/graph/badge.svg" />
 </a>
